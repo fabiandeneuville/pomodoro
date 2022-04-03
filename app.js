@@ -1,8 +1,8 @@
 const affichageTravail = document.querySelector(".affichageT");
 const affichagePause = document.querySelector(".affichageP");
-const btnGo = document.querySelector(".b1");
-const btnPause = document.querySelector(".b2");
-const btnReset = document.querySelector(".b3");
+const btnStart = document.querySelector(".btn1");
+const btnPause = document.querySelector(".btn2");
+const btnStop = document.querySelector(".btn3");
 const cycles = document.querySelector("h2");
 
 let checkInterval = false;
@@ -16,7 +16,7 @@ affichageTravail.innerText = `${Math.trunc(tempsInitial/60)} : ${(tempsInitial %
 
 affichagePause.innerText = `${Math.trunc(tempsDeRepos/60)} : ${(tempsDeRepos % 60 <10) ? `0${tempsDeRepos % 60}` : tempsDeRepos % 60}`;
 
-btnGo.addEventListener('click', () => {
+btnStart.addEventListener('click', () => {
 
     if(checkInterval === false){
     checkInterval = true;
@@ -40,7 +40,7 @@ btnGo.addEventListener('click', () => {
             affichagePause.innerText = `${Math.trunc(tempsDeRepos/60)} : ${(tempsDeRepos % 60 <10) ? `0${tempsDeRepos % 60}` : tempsDeRepos % 60}`;
         } 
     }, 1000)
-    btnReset.addEventListener('click', () => {
+    btnStop.addEventListener('click', () => {
         clearInterval(timer);
         checkInterval = false;
         tempsInitial = 1200;
@@ -55,9 +55,9 @@ btnGo.addEventListener('click', () => {
 
 btnPause.addEventListener('click', () => {
     if(pause ===false){
-        btnPause.innerText = "Play";
+        btnPause.innerText = "PLAY";
     } else if(pause === true){
-        btnPause.innerText = "Pause";
+        btnPause.innerText = "PAUSE";
     }
     pause = !pause;
 })
