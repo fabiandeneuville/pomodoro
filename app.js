@@ -21,9 +21,6 @@ btnStart.addEventListener('click', () => {
     if(checkInterval === false){
     checkInterval = true;
 
-    tempsInitial--;
-    affichageTravail.innerText = `${Math.trunc(tempsInitial/60)} : ${(tempsInitial % 60 < 10) ? `0${tempsInitial % 60}` : tempsInitial % 60}`;
-
     let timer = setInterval(() => {
         if(pause === false && tempsInitial > 0){
             tempsInitial--;
