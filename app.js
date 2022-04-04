@@ -12,6 +12,18 @@ let pause = false;
 let nbDeCycles = 0;
 cycles.innerText = `Nombre de cycles : ${nbDeCycles}`;
 
+const form = document.querySelector("form");
+const travail = document.getElementById("travail")
+const repos = document.getElementById("repos")
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    tempsInitial = travail.value;
+    tempsDeRepos = repos.value;
+    affichageTravail.innerText = `${Math.trunc(tempsInitial/60)} : ${(tempsInitial % 60 < 10) ? `0${tempsInitial % 60}` : tempsInitial % 60}`;
+    affichagePause.innerText = `${Math.trunc(tempsDeRepos/60)} : ${(tempsDeRepos % 60 <10) ? `0${tempsDeRepos % 60}` : tempsDeRepos % 60}`;
+})
+
 affichageTravail.innerText = `${Math.trunc(tempsInitial/60)} : ${(tempsInitial % 60 < 10) ? `0${tempsInitial % 60}` : tempsInitial % 60}`;
 
 affichagePause.innerText = `${Math.trunc(tempsDeRepos/60)} : ${(tempsDeRepos % 60 <10) ? `0${tempsDeRepos % 60}` : tempsDeRepos % 60}`;
@@ -28,9 +40,9 @@ btnStart.addEventListener('click', () => {
         } else if (pause === false &&tempsInitial === 0 && tempsDeRepos === 0){
             nbDeCycles ++;
             cycles.innerText = `Nombre de cycles : ${nbDeCycles}`;
-            tempsInitial = 1200;
+            tempsInitial = travail.value;
             affichageTravail.innerText = `${Math.trunc(tempsInitial/60)} : ${(tempsInitial % 60 < 10) ? `0${tempsInitial % 60}` : tempsInitial % 60}`;
-            tempsDeRepos = 300;
+            tempsDeRepos = repos.value;
             affichagePause.innerText = `${Math.trunc(tempsDeRepos/60)} : ${(tempsDeRepos % 60 <10) ? `0${tempsDeRepos % 60}` : tempsDeRepos % 60}`;
         } else if (pause === false && tempsInitial === 0){
             tempsDeRepos--;
@@ -39,9 +51,10 @@ btnStart.addEventListener('click', () => {
     }, 1000)
     btnStop.addEventListener('click', () => {
         clearInterval(timer);
+        btnStart.style.opacity = '1';
         checkInterval = false;
-        tempsInitial = 1200;
-        tempsDeRepos = 300;
+        tempsInitial = travail.value;
+        tempsDeRepos = repos.value;
         affichageTravail.innerText = `${Math.trunc(tempsInitial/60)} : ${(tempsInitial % 60 < 10) ? `0${tempsInitial % 60}` : tempsInitial % 60}`;
         affichagePause.innerText = `${Math.trunc(tempsDeRepos/60)} : ${(tempsDeRepos % 60 <10) ? `0${tempsDeRepos % 60}` : tempsDeRepos % 60}`;
     })
@@ -51,10 +64,12 @@ btnStart.addEventListener('click', () => {
 })
 
 btnPause.addEventListener('click', () => {
-    if(pause ===false){
-        btnPause.innerText = "PLAY";
+    if(pause === false){
+        btnPause.innerHTML = `<i class="fa-solid fa-play"></i></i>`;
+        btnStart.style.opacity = '0.2';
     } else if(pause === true){
-        btnPause.innerText = "PAUSE";
+        btnPause.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+        btnStart.style.opacity = '1';
     }
     pause = !pause;
 })
